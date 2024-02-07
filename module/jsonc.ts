@@ -3,6 +3,10 @@ type strToken_t2 = {
   value: any;
 }
 
+export function parse(jsonString: string) {
+  return parseAll(jsonString).object;
+}
+
 export function parseAll(jsonString: string): { object: any, comments: comment_t[] } {
   const tokens = tokenize(jsonString);
   let index = 0;

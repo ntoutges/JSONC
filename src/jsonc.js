@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringify = exports.parseAll = void 0;
+exports.stringify = exports.parseAll = exports.parse = void 0;
+function parse(jsonString) {
+    return parseAll(jsonString).object;
+}
+exports.parse = parse;
 function parseAll(jsonString) {
     const tokens = tokenize(jsonString);
     let index = 0;

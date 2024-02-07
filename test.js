@@ -89,5 +89,6 @@ test of block comments 2
 
 // // what does this do?`;
 
-const {object, comments} = JSONC.parseAll(text);
+// const {object, comments} = JSONC.parse(text);
+const object = JSONC.parse(text);
 console.log(JSONC.stringify(object, comments));
