@@ -9,12 +9,14 @@ JSONC+ stands for:
 * with (**C**)omments
 * (**+**) some extra features
 
-This is standard JSON, with standard JS-valid comments:
-// this is an inline comment
-/*
-  This is a block comment
-  I and exist on multiple lines!
-*/
+This is standard JSON, with standard JS-valid comments:\
+`// this is an inline comment\`
+```
+  /*
+    This is a block comment
+    I and exist on multiple lines!
+  */
+```
 
 JSONC+ allows comments to be injected into an object being `stringified`, and to extract comments when `parsing` an object
 
@@ -28,7 +30,7 @@ JSONC+ exposes 3 simple functions:
  This takes in a string, and returns a valid JavaScript object from the string. This functions the same way as JSON.parse(), but resolves references and ignores comments
 
 ### `parseAll(text)`
-  This takes in a string, and returns an object containing the parsed JavaScript object (with resolved references), and an array of all the comments
+  This takes in a string, and returns an object containing the parsed JavaScript object (with resolved references), and an array of all the comments.\
   Specifically, this returns:
   ```
     {
@@ -49,8 +51,8 @@ To add a JSONC+ comment into a string, or read the comment of an object, you mus
     inline: true
   };
 ```
-`comment.text` is the text to be in the comment. This *can* contain new liens.
-`comment.reference` is an array of the subkeys that inform the comment to what it is attached. (In this example, given `object`, this comment refers to `object.key.subkey`)
+`comment.text` is the text to be in the comment. This *can* contain new lines.\
+`comment.reference` is an array of the subkeys that inform the comment to what it is attached. (In this example, given `object`, this comment refers to `object.key.subkey`)\
 `comment.inline` is an optional value. If set to true or omitted, the comment is treated as inline/inline-multiline. Otherwise, it is treated as a block comment
 
 ## The + in JSONC+
@@ -64,7 +66,7 @@ JSONC+ adds the ability to have circular references, that is, if writing the fol
   object.key["sub-key"] = object;
 ```
 
-With standard JSON/JSONC, the following error would be triggered: `Uncaught TypeError: Converting circular structure to JSON`, because sub-key's content is one of its ancestors (ie: it contains itself).
+With standard JSON/JSONC, the following error would be triggered: `Uncaught TypeError: Converting circular structure to JSON`, because sub-key's content is one of its ancestors (ie: it contains itself).\
 JSONC+ removes this problem with the reference type, denoted as `*` followed by a standard JSON `stringified` array, containing the sub-keys to get to the referenced location.
 
 In this scenario, the JSONC+ output would be:
@@ -132,7 +134,7 @@ JSONC+ recognizes 3 types of comments:
     }`
   ```
 2. Multiline Inline Comments
-  These are the same as inline comments, but with multiple lines.
+  These are the same as inline comments, but with multiple lines.\
   These are shown above the key they reference
   ```
     var object = {
@@ -163,7 +165,7 @@ JSONC+ recognizes 3 types of comments:
     }`
   ```
 3. Block Comments
-  These are comments formed between a `/*` and `*/`, and are generally used for longer multiline comments.
+  These are comments formed between a `/*` and `*/`, and are generally used for longer multiline comments.\
   These are put in the same places as multiline inline comments.
   ```
     var object = {
