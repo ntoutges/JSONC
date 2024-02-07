@@ -3,11 +3,11 @@
 ## This repository gives an easy way of creating JSONC+ files
 
 JSONC+ stands for:
-* (J)ava(S)cript
-* (O)bject
-* (N)otation
-* with (C)omments
-* (+) some extra features
+* (**J**)ava(**S**)cript
+* (**O**)bject
+* (**N**)otation
+* with (**C**)omments
+* (**+**) some extra features
 
 This is standard JSON, with standard JS-valid comments:
 // this is an inline comment
