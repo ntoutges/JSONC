@@ -8,15 +8,18 @@ exports.parse = parse;
 function parseAll(jsonString) {
     const tokens = tokenize(jsonString);
     let index = 0;
-    const rootObj = {};
+    let rootObj = {};
     const keys = [];
     const stack = [{ object: rootObj, key: ":root:" }];
     const commentStack = []; // stores comments whose references come after the comment
     const initializedComments = []; // stores all finished comments
     const selfRefs = [];
     function replaceLastItemOnStack(newVal) {
-        if (stack.length < 2)
-            return; // impossible
+        if (stack.length < 2) { // delete all items on stack, and replace rootObj with newVal
+            stack.pop(); // remove any item on the stack
+            rootObj = newVal;
+            return;
+        }
         const key = stack.pop().key;
         stack[stack.length - 1].object[key] = newVal;
         return key;
@@ -135,7 +138,7 @@ function parseAll(jsonString) {
                 }
                 else {
                     key = replaceLastItemOnStack(value);
-                    if (tokens[index].type == "COMMA")
+                    if (index < tokens.length && tokens[index].type == "COMMA")
                         index++;
                     isNextKey = true;
                 }
@@ -146,7 +149,6 @@ function parseAll(jsonString) {
                 break;
             }
             default:
-                debugger;
                 console.log(`Unrecognized token: ${token.type}`);
         }
     }

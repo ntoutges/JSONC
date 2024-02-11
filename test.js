@@ -91,4 +91,4 @@ test of block comments 2
 
 // const {object, comments} = JSONC.parse(text);
 const object = JSONC.parse(text);
-console.log(JSONC.stringify(object, comments));
+console.log(JSONC.stringify(object));

@@ -10,7 +10,7 @@ export function parse(jsonString: string) {
 export function parseAll(jsonString: string): { object: any, comments: comment_t[] } {
   const tokens = tokenize(jsonString);
   let index = 0;
-  const rootObj = {};
+  let rootObj: any = {};
   const keys: string[] = [];
   const stack: { object: any, key: string, type?: string }[] = [{ object: rootObj, key: ":root:" }];
 
@@ -20,7 +20,11 @@ export function parseAll(jsonString: string): { object: any, comments: comment_t
   const selfRefs: { object: any, key: string, token: strToken_t2 }[] = [];
 
   function replaceLastItemOnStack(newVal: any) {
-    if (stack.length < 2) return; // impossible
+    if (stack.length < 2) { // delete all items on stack, and replace rootObj with newVal
+      stack.pop(); // remove any item on the stack
+      rootObj = newVal;
+      return;
+    }
     const key = stack.pop().key;
     stack[stack.length - 1].object[key] = newVal;
     return key;
@@ -138,7 +142,7 @@ export function parseAll(jsonString: string): { object: any, comments: comment_t
         }
         else {
           key = replaceLastItemOnStack(value);
-          if (tokens[index].type == "COMMA") index++;
+          if (index < tokens.length && tokens[index].type == "COMMA") index++;
           isNextKey = true;
         }
         if (token.type == "REFERENCE") {
@@ -148,7 +152,6 @@ export function parseAll(jsonString: string): { object: any, comments: comment_t
         break;
       }
       default:
-        debugger;
         console.log(`Unrecognized token: ${token.type}`)
     }
   }

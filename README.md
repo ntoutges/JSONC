@@ -9,8 +9,8 @@ JSONC+ stands for:
 * with (**C**)omments
 * (**+**) some extra features
 
-This is standard JSON, with standard JS-valid comments:\
-`// this is an inline comment\`
+This is standard JSON, with standard JS-valid comments:
+`// this is an inline comment`
 ```
   /*
     This is a block comment
