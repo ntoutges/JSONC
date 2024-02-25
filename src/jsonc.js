@@ -1,11 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringify = exports.parseAll = exports.parse = void 0;
-function parse(jsonString) {
+export function parse(jsonString) {
     return parseAll(jsonString).object;
 }
-exports.parse = parse;
-function parseAll(jsonString) {
+export function parseAll(jsonString) {
     const tokens = tokenize(jsonString);
     let index = 0;
     let rootObj = {};
@@ -178,7 +174,6 @@ function parseAll(jsonString) {
         comments: initializedComments.concat(commentStack) // push any comments put at the end in
     };
 }
-exports.parseAll = parseAll;
 function tokenize(jsonString) {
     const tokens = [];
     let index = 0;
@@ -323,7 +318,7 @@ function tokenize(jsonString) {
     }
     return tokens;
 }
-function stringify(value, comments = []) {
+export function stringify(value, comments = []) {
     const strTokens = getStrTokensFromObject(value);
     const uncomments = injectCommentsIntoStrTokens(strTokens, comments); // uncomments are the comments without matching keys
     let str = stringifyStrTokens(strTokens);
@@ -334,7 +329,6 @@ function stringify(value, comments = []) {
     }
     return uncommentStrs + str;
 }
-exports.stringify = stringify;
 function getStrTokensFromObject(value) {
     const keyData = [{ keys: [], value }];
     const seenValues = []; // stores objects already seen
